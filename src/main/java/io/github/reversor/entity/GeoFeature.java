@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class GeoObject {
+public class GeoFeature {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
