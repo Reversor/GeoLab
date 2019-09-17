@@ -1,4 +1,4 @@
-package io.github.reversor.dao;
+package io.github.reversor.geolab.dao;
 
 import java.io.Serializable;
 

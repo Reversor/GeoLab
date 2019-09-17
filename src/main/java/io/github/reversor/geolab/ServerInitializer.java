@@ -1,4 +1,4 @@
-package io.github.reversor;
+package io.github.reversor.geolab;
 
 import io.swagger.v3.jaxrs2.integration.resources.AcceptHeaderOpenApiResource;
 import io.swagger.v3.jaxrs2.integration.resources.OpenApiResource;

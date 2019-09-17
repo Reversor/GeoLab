@@ -1,4 +1,4 @@
-package io.github.reversor.service;
+package io.github.reversor.geolab.service;
 
 import javax.inject.Singleton;
 

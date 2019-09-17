@@ -1,6 +1,6 @@
-package io.github.reversor.rest;
+package io.github.reversor.geolab.rest;
 
-import io.github.reversor.service.HelloService;
+import io.github.reversor.geolab.service.HelloService;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;

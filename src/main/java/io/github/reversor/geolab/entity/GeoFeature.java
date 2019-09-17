@@ -1,4 +1,4 @@
-package io.github.reversor.entity;
+package io.github.reversor.geolab.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,8 +26,9 @@ public class GeoFeature {
     String country;
 
     @Lob
-    @Column(name = "photo", columnDefinition = "BLOB")
+    @Column(columnDefinition = "BLOB")
     byte[] photo;
+
     String description;
 
 }
