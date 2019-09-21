@@ -21,6 +21,7 @@ public class LiquibaseProducer {
     public CDILiquibaseConfig createConfig() {
         CDILiquibaseConfig config = new CDILiquibaseConfig();
         config.setContexts("init");
+        //FIXME Parameters doesn't work
         config.setParameters(Map.ofEntries(
                 Map.entry("database.databaseChangeLogLockTableName", "changelog_geolab_lock"),
                 Map.entry("database.databaseChangeLogTableName", "changelog_geolab")
@@ -35,7 +36,7 @@ public class LiquibaseProducer {
         PGSimpleDataSource dataSource = new PGSimpleDataSource();
         dataSource.setURL("jdbc:postgresql://localhost:5432/postgres");
         dataSource.setUser("postgres");
-        dataSource.setPassword("0513");
+        dataSource.setPassword("postgres");
         this.dataSource = dataSource;
         return dataSource;
     }

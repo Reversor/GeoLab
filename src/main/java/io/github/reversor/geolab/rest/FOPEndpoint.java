@@ -2,8 +2,8 @@ package io.github.reversor.geolab.rest;
 
 import io.github.reversor.geolab.entity.FOPWrapper;
 import io.github.reversor.geolab.service.FOPService;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import java.io.BufferedReader;
+import java.io.StringReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import javax.inject.Inject;
@@ -24,6 +24,7 @@ import org.apache.fop.apps.MimeConstants;
 @Path("fop")
 public class FOPEndpoint {
 
+    private static final String EMPTY_XML = "<?xml version=\"1.0\" encoding=\"utf-8\"?><metadata></metadata>";
     private FOPService fopService;
 
     @Inject
@@ -54,9 +55,8 @@ public class FOPEndpoint {
     public Response examplePDF() {
         StreamingOutput streamingOutput = output -> {
             try {
-                InputStream xslt = Files.newInputStream(Paths.get("C:\\Users\\nahuk\\IdeaProjects\\JerseyGeoLab\\fop\\PurchaseOrder.xsl"));
-//                InputStream xml = Files.newInputStream(Paths.get("C:\\Users\\nahuk\\IdeaProjects\\JerseyGeoLab\\fop\\PO.xsd"));
-                fopService.convertToPDF(new ByteArrayInputStream("<?xml version=\"1.0\" encoding=\"utf-8\"?><metadata></metadata>".getBytes()), xslt, output);
+                BufferedReader xslt = Files.newBufferedReader(Paths.get("fop/PurchaseOrder.xsl"));
+                fopService.convertToPDF(new StringReader(EMPTY_XML), xslt, output);
             } catch (Exception e) {
                 throw new InternalServerErrorException(e);
             }

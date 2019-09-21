@@ -2,9 +2,8 @@ package io.github.reversor.geolab.entity;
 
 public class FOPWrapper {
 
-    String xml;
-
-    String xlst;
+    private String xml;
+    private String xlst;
 
     public String getXml() {
         return xml;

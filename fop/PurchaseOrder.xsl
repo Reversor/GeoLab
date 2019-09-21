@@ -2,7 +2,7 @@
 <!DOCTYPE fo:root SYSTEM  "http://xep.xattic.com/xep/resources/validators/dtd/fo.dtd">
 <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
   <fo:layout-master-set>
-    <fo:simple-page-master master-name="main" page-width="297mm"
+    <fo:simple-page-master master-name="A4-landscape" page-width="297mm"
       page-height="210mm" margin-left="1in" margin-right="1in"
       margin-top="0.5in" margin-bottom="0.5in">
       <fo:region-body margin-top="0.25in" margin-bottom="0.25in"/>
@@ -10,7 +10,7 @@
       <fo:region-after extent="0.25in"/>
     </fo:simple-page-master>
   </fo:layout-master-set>
-  <fo:page-sequence master-reference="main" initial-page-number="1">
+  <fo:page-sequence master-reference="A4-landscape" initial-page-number="1">
     <fo:static-content flow-name="xsl-region-before">
       <fo:block text-align="end" font-size="10pt" font-family="serif"
         line-height="14pt">
