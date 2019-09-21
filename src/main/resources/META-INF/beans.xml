@@ -1,6 +1,2 @@
-<?xml version="1.1" encoding="UTF-8"?>
-<beans>
-  <scan>
-    <exclude name="org.jboss.weld.**"/>
-  </scan>
+<beans bean-discovery-mode="all">
 </beans>

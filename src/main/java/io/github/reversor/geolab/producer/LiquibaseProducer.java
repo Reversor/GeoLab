@@ -4,35 +4,27 @@ import java.sql.SQLException;
 import java.util.Map;
 import javax.annotation.Resource;
 import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
 import javax.sql.DataSource;
 import liquibase.integration.cdi.CDILiquibaseConfig;
 import liquibase.integration.cdi.annotations.LiquibaseType;
 import liquibase.resource.ClassLoaderResourceAccessor;
 import liquibase.resource.ResourceAccessor;
+import org.postgresql.ds.PGSimpleDataSource;
 
 public class LiquibaseProducer {
 
-    private Map<String, String> params;
-
-    private DataSource myDataSource;
-
-    @Inject
-    public LiquibaseProducer(Map<String, String> params) {
-        this.params = params;
-    }
-
     @Resource
-    public void setMyDataSource(DataSource myDataSource) {
-        this.myDataSource = myDataSource;
-    }
+    private DataSource dataSource;
 
     @Produces
     @LiquibaseType
     public CDILiquibaseConfig createConfig() {
         CDILiquibaseConfig config = new CDILiquibaseConfig();
         config.setContexts("init");
-        config.setParameters(params);
+        config.setParameters(Map.ofEntries(
+                Map.entry("database.databaseChangeLogLockTableName", "changelog_geolab_lock"),
+                Map.entry("database.databaseChangeLogTableName", "changelog_geolab")
+        ));
         config.setChangeLog("db.changelog-master.xml");
         return config;
     }
@@ -40,7 +32,12 @@ public class LiquibaseProducer {
     @Produces
     @LiquibaseType
     public DataSource createDataSource() throws SQLException {
-        return myDataSource;
+        PGSimpleDataSource dataSource = new PGSimpleDataSource();
+        dataSource.setURL("jdbc:postgresql://localhost:5432/postgres");
+        dataSource.setUser("postgres");
+        dataSource.setPassword("0513");
+        this.dataSource = dataSource;
+        return dataSource;
     }
 
     @Produces
