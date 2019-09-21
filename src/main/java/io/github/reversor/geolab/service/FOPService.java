@@ -1,14 +1,14 @@
 package io.github.reversor.geolab.service;
 
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import javax.inject.Singleton;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.StreamingOutput;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Result;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -25,11 +25,17 @@ import org.apache.fop.apps.MimeConstants;
 public class FOPService {
 
     public void convertToPDF(String xml, String xslt, OutputStream out)
-            throws FOPException, TransformerException, IOException {
-        try (ByteArrayInputStream xmlStream = new ByteArrayInputStream(xml.getBytes());
-                ByteArrayInputStream xlstStream = new ByteArrayInputStream(xslt.getBytes())) {
-            StreamSource xmlSource = new StreamSource(xmlStream);
-            StreamSource xsltSource = new StreamSource(xlstStream);
+            throws FOPException, TransformerException, IOException, ParserConfigurationException {
+        convertToPDF(new ByteArrayInputStream(xml.getBytes()),
+                new ByteArrayInputStream(xslt.getBytes()),
+                out);
+    }
+
+    public void convertToPDF(InputStream xml, InputStream xslt, OutputStream out)
+            throws IOException, FOPException, TransformerException, ParserConfigurationException {
+        try (xml; xslt) {
+            StreamSource xmlSource = new StreamSource(xml);
+            StreamSource xsltSource = new StreamSource(xslt);
 
             FopFactory fopFactory = FopFactory.newInstance(new File(".").toURI());
             FOUserAgent foUserAgent = fopFactory.newFOUserAgent();
@@ -42,6 +48,7 @@ public class FOPService {
 
             Result res = new SAXResult(fop.getDefaultHandler());
 
+            DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
             transformer.transform(xmlSource, res);
         }
     }

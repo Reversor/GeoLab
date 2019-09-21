@@ -33,14 +33,6 @@ public class Main {
         URI uri = Optional.ofNullable(parse.getOptionValue('h')).map(URI::create).orElse(BASE_URI);
 
         try {
-            InjectionManager injectionManager = new CdiSeInjectionManagerFactory().create();
-            injectionManager.register(new AbstractBinder() {
-                @Override
-                protected void configure() {
-                }
-            });
-            injectionManager.completeRegistration();
-
             Server server = ServerInitializer.create(uri);
             server.start();
 
