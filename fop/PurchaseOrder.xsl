@@ -2,8 +2,8 @@
 <!DOCTYPE fo:root SYSTEM  "http://xep.xattic.com/xep/resources/validators/dtd/fo.dtd">
 <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
   <fo:layout-master-set>
-    <fo:simple-page-master master-name="main" page-width="8.5in"
-      page-height="11in" margin-left="1in" margin-right="1in"
+    <fo:simple-page-master master-name="main" page-width="297mm"
+      page-height="210mm" margin-left="1in" margin-right="1in"
       margin-top="0.5in" margin-bottom="0.5in">
       <fo:region-body margin-top="0.25in" margin-bottom="0.25in"/>
       <fo:region-before extent="0.25in"/>
