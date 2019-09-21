@@ -51,7 +51,6 @@ public class FOPService {
 
             Result res = new SAXResult(fop.getDefaultHandler());
 
-            DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
             transformer.transform(new StreamSource(xml), res);
         }
     }
